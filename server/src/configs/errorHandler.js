@@ -1,10 +1,10 @@
-exports.notFoundRoute = (req, res, next) => {
+const notFoundRoute = (req, res, next) => {
   res.status(404).json({
     message: "Sorry! Your requested page was not found!",
   });
 };
 
-exports.errorHandlers = (err, req, res, next) => {
+const errorHandlers = (err, req, res, next) => {
   if (res.headersSent) {
     return next("Something went wrong");
   } else {
@@ -19,3 +19,4 @@ exports.errorHandlers = (err, req, res, next) => {
     }
   }
 };
+module.exports = { notFoundRoute, errorHandlers };
