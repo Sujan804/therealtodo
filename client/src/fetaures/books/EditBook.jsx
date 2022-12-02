@@ -1,4 +1,4 @@
-import { addBooks } from "./BooksSlice";
+import { updateBooks } from "./BooksSlice";
 const { useState } = require("react");
 const { useDispatch } = require("react-redux");
 const { useNavigate, useLocation } = require("react-router-dom");
@@ -14,7 +14,7 @@ const UpdateBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const book = { id, title, author };
-    dispatch(addBooks(book));
+    dispatch(updateBooks(book));
     navigate("/show-books", { replace: true });
   };
   return (

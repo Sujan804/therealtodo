@@ -31,7 +31,7 @@ const BookView = () => {
                   <td>{title}</td>
                   <td>{author}</td>
                   <td>
-                    <Link to="/edit-book" state={{ id, title, author }}>
+                    <Link to="/edit-books" state={{ id, title, author }}>
                       <button>Edit</button>
                     </Link>
                     <button
