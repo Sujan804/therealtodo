@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import "./App.css";
+import getAllTodos from "./services-api/actions/todosAction";
+const Todo  = ()=> {
+  const {isLoading,todos, error} = useSelector((state)=>state);
 
-function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTodos());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   <> 
+      <h2>Todos apps</h2>
+      {isLoading && <h3>Loading...</h3>}
+      {error && <h3>{error.message}</h3>}
+      <section>
+        {
+          todos && todos.map((todo)=>{
+            return(
+              <article key={todo.id}>
+                <h4>{todo.id}</h4>
+                <p>{todo.title}</p>
+              </article>
+            )
+          })
+        }
+      </section> 
+   </>
+  )
 }
 
-export default App;
+export default Todo;
