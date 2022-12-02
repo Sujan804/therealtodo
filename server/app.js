@@ -57,8 +57,9 @@ const todos = require("./src/routes/todos-route");
 const { notFoundRoute, errorHandlers } = require("./src/configs/errorHandler");
 
 env.config();
-
+var cors = require('cors')
 const app = express();
+app.use(cors())
 const connectDatabase = require("./src/db/connect");
 connectDatabase();
 app.use(express.static(path.join(__dirname, "public")));
@@ -77,7 +78,6 @@ app.get("/", (res, req) => {
 app.use("/api", todos);
 app.use(notFoundRoute);
 app.use(errorHandlers);
-
 app.listen(process.env.PORT, () => {
   console.log("App is listening on port " + process.env.PORT);
 });

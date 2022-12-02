@@ -16,9 +16,7 @@ export const getAllTodos = async (dispatch) => {
   dispatch({ type: GET_TODOS_REQUEST });
 
   try {
-    const res = await axios.get(
-      process.env.REACT_APP_API_BASE_URL + "/api/v1/todos-all"
-    );
+    const res = await axios.get("http://localhost:5000/api/todos-all");
     dispatch({ type: GET_TODOS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: GET_TODOS_FAILURE, payload: error });
@@ -28,15 +26,11 @@ export const getAllTodos = async (dispatch) => {
 // make a action to create a todo
 export const createTodo = (payload) => async (dispatch) => {
   dispatch({ type: POST_TODOS_REQUEST });
-
   try {
-    const res = await axios.post(
-      process.env.REACT_APP_API_BASE_URL + "/api/v1/todo/new",
-      {
-        title: payload.todoTitle,
-        description: payload.todoDescription,
-      }
-    );
+    const res = await axios.post("http://localhost:5000/api/todo/new", {
+      title: payload.todoTitle,
+      description: payload.todoDescription,
+    });
     dispatch({ type: POST_TODOS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: POST_TODOS_FAILURE, payload: error });
@@ -49,7 +43,7 @@ export const deleteTodo = (payload) => async (dispatch) => {
 
   try {
     const res = await axios.delete(
-      process.env.REACT_APP_API_BASE_URL + "/api/v1/todo/" + payload.todoId
+      "http://localhost:5000/api/todo/" + payload.todoId
     );
     dispatch({ type: DELETE_TODOS_SUCCESS, payload: res.data });
   } catch (error) {
